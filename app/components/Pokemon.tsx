@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PokeBall from "./styled/Pokeball";
 import MiddleBand from "./styled/MiddleBand";
 import PokeBallLabel from "./styled/PokeballLabel";
+import { useRouter } from "next/navigation";
 
 type PokemonProps = {
   item: {
@@ -12,8 +13,24 @@ type PokemonProps = {
 };
 
 const Pokemon: React.FC<PokemonProps> = ({ item }) => {
+  const router = useRouter();
+
+  const extractCategoryAndId = (urlString: string) => {
+    const url = new URL(urlString);
+    const pathSegments = url.pathname.split("/").filter(Boolean);
+    const id = pathSegments.pop();
+    const itemCategory = pathSegments.pop();
+
+    return { itemCategory, id };
+  };
+
+  const handleClick = (url: string) => {
+    const { itemCategory, id } = extractCategoryAndId(url);
+    router.push(`/category/${item.name}/subCategory/${itemCategory}`);
+  };
+
   return (
-    <PokeBall key={item.name}>
+    <PokeBall key={item.name} onClick={() => handleClick(item.url)}>
       <MiddleBand />
       <PokeBallLabel>{item.name}</PokeBallLabel>
     </PokeBall>

@@ -3,9 +3,6 @@
 import Pokemon from "@/app/components/Pokemon";
 import Container from "@/app/components/styled/Container";
 import GridContainer from "@/app/components/styled/GridContainer";
-import MiddleBand from "@/app/components/styled/MiddleBand";
-import PokeBall from "@/app/components/styled/Pokeball";
-import PokeBallLabel from "@/app/components/styled/PokeballLabel";
 import PokemonLoader from "@/app/components/styled/PokemonLoader";
 import { useQuery } from "@tanstack/react-query";
 
@@ -13,7 +10,6 @@ type ResultItem = {
   name: string;
   url: string;
 };
-
 
 export default function Page({ params }: { params: { item: string } }) {
   const { item } = params;
