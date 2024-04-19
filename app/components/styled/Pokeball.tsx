@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const bobbing = keyframes`
+  0%, 100% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+`;
 
 export const PokeBall = styled.div`
   width: 100%;
@@ -8,6 +17,11 @@ export const PokeBall = styled.div`
   border-radius: 50%;
   overflow: hidden;
   background: white;
+  cursor: pointer;
+  animation: ${bobbing} 3s ease-in-out infinite;
+  &:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
   &:before {
     content: '';
     position: absolute;
