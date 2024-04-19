@@ -22,7 +22,7 @@ function formatItem(item: string): string {
     .join(" ");
 }
 
-const Pokemon = () => {
+const Pokemons = () => {
   const router = useRouter();
   const apiUrl = "https://pokeapi.co/api/v2";
 
@@ -75,4 +75,4 @@ const Pokemon = () => {
   );
 };
 
-export default Pokemon;
+export default Pokemons;
