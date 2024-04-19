@@ -31,10 +31,12 @@ const Pokemon = () => {
     queryFn: () => fetch(apiUrl).then((res) => res.json()),
   });
 
-  const handleClick = (item) => {};
+  const handleClick = (item: string) => {
+     router.push(`/category/${item}`)
+  };
 
   // Random color generator
-  const getRandomColor = () => {
+  const getRandomColor = () => { 
     const letters = "0123456789ABCDEF";
     let color = "#";
     for (let i = 0; i < 6; i++) {
