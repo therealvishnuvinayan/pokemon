@@ -56,6 +56,7 @@ const Pokemons = () => {
   return (
     <Container>
       <ButtonContainer>
+        
         {data &&
           Object.keys(data).map((item, index) => {
             const borderColor = getRandomColor();
