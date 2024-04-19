@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Container from "./styled/Container";
+import { Container } from "@radix-ui/themes";
 
 const Header = () => {
   return (

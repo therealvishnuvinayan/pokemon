@@ -3,9 +3,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useRouter } from "next/navigation";
-import Container from "./styled/Container";
 import styled from "styled-components";
 import StyledButton from "./styled/Button";
+import Loader from "./styled/PokemonLoader";
+import PokemonLoader from "./styled/PokemonLoader";
+import { Container } from "@radix-ui/themes";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -14,17 +16,17 @@ const ButtonContainer = styled.div`
 `;
 
 function formatItem(item: string): string {
-    return item
-      .split('-')
-      .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
-      .join(' ');
-  }
+  return item
+    .split("-")
+    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+    .join(" ");
+}
 
 const Pokemon = () => {
   const router = useRouter();
   const apiUrl = "https://pokeapi.co/api/v2";
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["all-pokemons"],
     queryFn: () => fetch(apiUrl).then((res) => res.json()),
   });
@@ -40,6 +42,14 @@ const Pokemon = () => {
     }
     return color;
   };
+
+  if (isLoading) {
+    return (
+      <Container>
+        <PokemonLoader />
+      </Container>
+    );
+  }
 
   return (
     <Container>
