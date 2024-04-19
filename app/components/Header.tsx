@@ -1,16 +1,17 @@
 import React from "react";
 import Image from "next/image";
+import Container from "./styled/Container";
 
 const Header = () => {
   return (
-    <div>
+    <Container>
       <Image
         src="/pokemon-logo.png"
         alt="pokemon-logo"
         width={200}
         height={60}
       />
-    </div>
+    </Container>
   );
 };
 
