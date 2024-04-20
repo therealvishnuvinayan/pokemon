@@ -71,7 +71,7 @@ export default function Page({
   }
 
   const flavorTextsPerLanguage: FlavorTextsAccumulator =
-    data.flavor_text_entries.reduce(
+    data?.flavor_text_entries?.reduce(
       (acc: FlavorTextsAccumulator, entry: FlavorTextEntry) => {
         const language = entry.language.name;
         acc[language] = (acc[language] || 0) + 1;

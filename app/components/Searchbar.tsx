@@ -1,9 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-const Searchbar = () => {
-  return (
-    <div>Searchbar</div>
-  )
+interface SearchbarProps {
+  onSearchChange: (term: string) => void;
 }
 
-export default Searchbar
+const Searchbar: React.FC<SearchbarProps> = ({ onSearchChange }) => {
+  return (
+    <input
+      type="text"
+      placeholder="Search Pokémon"
+      onChange={(e) => onSearchChange(e.target.value)}
+    />
+  );
+};
+
+export default Searchbar;

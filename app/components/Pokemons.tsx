@@ -1,13 +1,17 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import StyledButton from "./styled/Button";
-import Loader from "./styled/PokemonLoader";
 import PokemonLoader from "./styled/PokemonLoader";
 import { Container } from "@radix-ui/themes";
+import Searchbar from "./Searchbar";
+
+interface PokemonData {
+  [key: string]: any;
+}
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -18,13 +22,14 @@ const ButtonContainer = styled.div`
 function formatItem(item: string): string {
   return item
     .split("-")
-    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
 
 const Pokemons = () => {
   const router = useRouter();
   const apiUrl = "https://pokeapi.co/api/v2";
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { data, isLoading } = useQuery({
     queryKey: ["all-pokemons"],
@@ -32,11 +37,21 @@ const Pokemons = () => {
   });
 
   const handleClick = (item: string) => {
-     router.push(`/category/${item}`)
+    router.push(`/category/${item}`);
+  };
+
+  const filteredData = data
+    ? Object.keys(data).filter((key) =>
+        key.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
+
+  const handleSearchChange = (term: string) => {
+    setSearchTerm(term);
   };
 
   // Random color generator
-  const getRandomColor = () => { 
+  const getRandomColor = () => {
     const letters = "0123456789ABCDEF";
     let color = "#";
     for (let i = 0; i < 6; i++) {
@@ -55,22 +70,21 @@ const Pokemons = () => {
 
   return (
     <Container>
+      <Searchbar onSearchChange={handleSearchChange} />
       <ButtonContainer>
-        
-        {data &&
-          Object.keys(data).map((item, index) => {
-            const borderColor = getRandomColor();
-            return (
-              <StyledButton
-                borderColor={borderColor}
-                hoverBackgroundColor={borderColor + "20"}
-                onClick={() => handleClick(item)}
-                key={item}
-              >
-                {formatItem(item)}
-              </StyledButton>
-            );
-          })}
+        {(searchTerm ? filteredData : Object.keys(data)).map((item) => {
+          const borderColor = getRandomColor();
+          return (
+            <StyledButton
+              borderColor={borderColor}
+              hoverBackgroundColor={borderColor + "20"}
+              onClick={() => handleClick(item)}
+              key={item}
+            >
+              {formatItem(item)}
+            </StyledButton>
+          );
+        })}
       </ButtonContainer>
     </Container>
   );
