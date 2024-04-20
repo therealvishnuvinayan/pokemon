@@ -4,6 +4,7 @@ import PokeBall from "./styled/Pokeball";
 import MiddleBand from "./styled/MiddleBand";
 import PokeBallLabel from "./styled/PokeballLabel";
 import { useRouter } from "next/navigation";
+import formatItem from "../utils/formatName";
 
 type PokemonProps = {
   item: {
@@ -32,7 +33,7 @@ const Pokemon: React.FC<PokemonProps> = ({ item }) => {
   return (
     <PokeBall key={item.name} onClick={() => handleClick(item.url)}>
       <MiddleBand />
-      <PokeBallLabel>{item.name}</PokeBallLabel>
+      <PokeBallLabel> {formatItem(item.name)}</PokeBallLabel>
     </PokeBall>
   );
 };

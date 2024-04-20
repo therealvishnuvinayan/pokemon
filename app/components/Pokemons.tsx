@@ -8,6 +8,7 @@ import StyledButton from "./styled/Button";
 import PokemonLoader from "./styled/PokemonLoader";
 import { Container } from "@radix-ui/themes";
 import Searchbar from "./Searchbar";
+import formatItem from "../utils/formatName";
 
 interface PokemonData {
   [key: string]: any;
@@ -19,12 +20,6 @@ const ButtonContainer = styled.div`
   gap: 0.5rem;
 `;
 
-function formatItem(item: string): string {
-  return item
-    .split("-")
-    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
 
 const Pokemons = () => {
   const router = useRouter();
