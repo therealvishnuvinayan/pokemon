@@ -26,7 +26,7 @@ const Pokemon: React.FC<PokemonProps> = ({ item }) => {
 
   const handleClick = (url: string) => {
     const { itemCategory, id } = extractCategoryAndId(url);
-    router.push(`/category/${item.name}/subCategory/${itemCategory}`);
+    router.push(`/category/${itemCategory}/${id}`);
   };
 
   return (
