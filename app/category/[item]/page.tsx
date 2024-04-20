@@ -1,5 +1,6 @@
 "use client";
 
+import Layout from "@/app/components/Layout";
 import Pokemon from "@/app/components/Pokemon";
 import Container from "@/app/components/styled/Container";
 import GridContainer from "@/app/components/styled/GridContainer";
@@ -29,11 +30,13 @@ export default function Page({ params }: { params: { item: string } }) {
 
   return (
     <Container>
+      <Layout>
       <GridContainer>
         {data.results.map((item: ResultItem) => (
           <Pokemon item={item} key={item.name} />
         ))}
       </GridContainer>
+      </Layout>
     </Container>
   );
 }

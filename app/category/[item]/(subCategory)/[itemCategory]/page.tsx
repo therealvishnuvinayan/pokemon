@@ -6,6 +6,9 @@ import Container from "@/app/components/styled/Container";
 import PokemonLoader from "@/app/components/styled/PokemonLoader";
 import dynamic from "next/dynamic";
 import processData from "@/app/utils/processData";
+import Layout from "@/app/components/Layout";
+import Heading from "@/app/components/styled/Heading";
+import formatItem from "@/app/utils/formatName";
 
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -20,7 +23,7 @@ interface DataState {
   [key: string]: any;
 }
 
-type ChartType = 'bar' | 'line' | 'area' | 'pie' | 'donut' | 'scatter'; // Extend as needed
+type ChartType = "bar" | "line" | "area" | "pie" | "donut" | "scatter";
 
 interface ChartData {
   options: {
@@ -67,15 +70,17 @@ const CategoryDetailPage: React.FC<{ params: Params }> = ({ params }) => {
 
   return (
     <Container>
-      <h1>{`Details for ${itemCategory}: ${item}`}</h1>
-      {chartData && (
-        <ReactApexChart
-          options={chartData.options}
-          series={chartData.series}
-          type="bar"
-          height={350}
-        />
-      )}
+      <Layout>
+        <Heading>{`${formatItem(item)}`}</Heading>
+        {chartData && (
+          <ReactApexChart
+            options={chartData.options}
+            series={chartData.series}
+            type="bar"
+            height={350}
+          />
+        )}
+      </Layout>
     </Container>
   );
 };
