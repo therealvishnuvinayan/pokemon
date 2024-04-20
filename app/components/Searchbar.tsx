@@ -1,4 +1,6 @@
-import React from 'react';
+import React from "react";
+import SearchInput from "./styled/SearchInput";
+import SearchContainer from "./styled/SearchContainer";
 
 interface SearchbarProps {
   onSearchChange: (term: string) => void;
@@ -6,11 +8,13 @@ interface SearchbarProps {
 
 const Searchbar: React.FC<SearchbarProps> = ({ onSearchChange }) => {
   return (
-    <input
-      type="text"
-      placeholder="Search Pokémon"
-      onChange={(e) => onSearchChange(e.target.value)}
-    />
+    <SearchContainer>
+      <SearchInput
+        type="text"
+        placeholder="Search Pokémon"
+        onChange={(e) => onSearchChange(e.target.value)}
+      />
+    </SearchContainer>
   );
 };
 
